@@ -1,0 +1,36 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-8 my-3">
+                <h1 class="text-center">Create your account</h1>
+
+                <%- include('includes/messages') %>
+                
+                <div class="row">
+                    <div class="col-lg">
+                        <form action="/register" method="POST">
+                          <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+                            <div class="form-group">
+                              <label for="email">Email:</label>
+                              <input type="email" class="form-control" name="email">
+                            </div>
+                            <div class="form-group">
+                              <label for="password">Password:</label>
+                              <input type="password" class="form-control" name="password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Sign up</button>
+                          </form>
+                    </div>
+            </div>
+            <div class="text-center mt-3">
+                <p>Already have an account? <a href="/login">Login here</a></p>
+            </div>
+
+            <div class="col-lg-2"></div>
+    </div>
+<%- include('includes/footer') %>
+
