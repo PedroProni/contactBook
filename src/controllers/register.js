@@ -15,7 +15,8 @@ exports.create = async (req, res) => {
       return;
     }
 
-    return res.send(user.errors);
+    req.flash("success", `User created successfully.`);
+    req.session.save(() => res.redirect("./register"));
   } catch(err) {
     console.log(err)
     return res.render("404");
