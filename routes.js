@@ -8,8 +8,10 @@ const register = require("./src/controllers/register");
 route.get("/", home.index);
 
 // Rotas de login
-route.get("/login", login.index);
 route.get("/register", register.index);
 route.post("/register", register.create);
+route.get("/login", login.index);
+route.post("/login", login.login);
+route.get("/logout", login.logout);
 
 module.exports = route;
