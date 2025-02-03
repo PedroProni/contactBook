@@ -8,7 +8,7 @@ const ContactSchema = new mongoose.Schema({
   phone: { type: String, required: false, default: "" },
   create_at: { type: Date, default: Date.now(), immutable: true },
   updated_at: { type: Date, default: Date.now() },
-  created_by: { type: String, required: false }
+  created_by: { type: String, required: true }
 });
 
 const ContactModel = mongoose.model("Contact", ContactSchema);

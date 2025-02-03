@@ -19,10 +19,10 @@ module.exports = {
                     },
                 }
             },
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }
+            // {
+            //     test: /\.css$/,
+            //     use: ['style-loader', 'css-loader']
+            // }
         ]
     },
     devtool: 'source-map',
