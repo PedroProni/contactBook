@@ -23,6 +23,7 @@ const {
   globalMiddleware,
   checkCsrfError,
   csrfMiddleware,
+  loginRequired,
 } = require("./src/middlewares/middleware");
 
 app.use(helmet());
@@ -52,6 +53,7 @@ app.use(csrf());
 app.use(globalMiddleware);
 app.use(csrfMiddleware);
 app.use(checkCsrfError);
+
 app.use(routes);
 
 app.on("ready", () => {
