@@ -6,7 +6,7 @@ exports.index = (req, res) => {
 
 exports.register = async (req, res) => {
   try {
-    const contact = new Contact(req.body);
+    const contact = new Contact(req.body, req.session.user._id);
     await contact.register();
 
     if (contact.errors.length > 0) {

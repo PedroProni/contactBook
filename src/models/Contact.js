@@ -8,20 +8,23 @@ const ContactSchema = new mongoose.Schema({
   phone: { type: String, required: false, default: "" },
   create_at: { type: Date, default: Date.now(), immutable: true },
   updated_at: { type: Date, default: Date.now() },
+  created_by: { type: String, required: false }
 });
 
 const ContactModel = mongoose.model("Contact", ContactSchema);
 
 class Contact {
-  constructor(body) {
+  constructor(body, session) {
     this.body = body;
+    this.session = session;
     this.errors = [];
     this.contact = null;
   }
 
   async register() {
-    this.validate()
-    if(this.errors.length > 0) return;
+    this.validate();
+    if (this.errors.length > 0) return;
+    this.body.created_by = this.session;
     this.contact = await ContactModel.create(this.body);
   }
 
@@ -47,23 +50,22 @@ class Contact {
     };
   }
 
-  
   async edit(id) {
     if (typeof id !== "string") return;
     this.validate();
-    if(this.errors.length > 0) return;
+    if (this.errors.length > 0) return;
+    this.body.updated_at = Date.now();
     this.contact = await ContactModel.findByIdAndUpdate(id, this.body, { new: true });
   }
 
   static async lookUp(id) {
     if (typeof id !== "string") return;
-    const contact =  await ContactModel.findById(id);
+    const contact = await ContactModel.findById(id);
     return contact;
   }
 
-  static async listContacts() {
-    const contacts =  await ContactModel.find()
-      .sort({ updated_at: -1 });
+  static async listContacts(id) {
+    const contacts = await ContactModel.find({ created_by: id }).sort({ updated_at: -1 });
     return contacts;
   }
 
